@@ -4,7 +4,7 @@
   (:import (org.joda.time.format DateTimeFormat)))
 
 (defn heading-to-keyword [heading]
-  (keyword (.replaceAll (.toLowerCase heading) " " "-")))
+  (keyword (.replaceAll (.toLowerCase (.trim heading)) " " "-")))
 
 (defn header-row? [row]
   (= (first row) "Date"))
@@ -40,10 +40,10 @@
   ["Date" "Reference" "Paid In" "Paid Out" "Balance"])
 
 (def input-date-formatter
-  (DateTimeFormat/forPattern "d MMM yyyy"))
+  (DateTimeFormat/forPattern "dd/MM/yyyy"))
 
 (def output-date-formatter
-  (DateTimeFormat/forPattern "dd/MM/yyyy"))
+  input-date-formatter)
 
 (defn parse-date [value]
   (.parseLocalDate input-date-formatter value))
